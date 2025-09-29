@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOCCACIA Web Interface</title>
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="/html/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Grupos e Equipas - Detalhes</h1>
+    </header>
+    <div class="container">
+        <!-- Navigation -->
+        <nav>
+            <a href="/site/groups" class="nav-button">View Groups</a>
+            <!--<a href="#search-group" class="nav-button">Search Group</a>-->
+            <a href="#create-group" class="nav-button">Create Group</a>
+            <a href="#update-group" class="nav-button">Update Group</a>
+            <a href="#delete-group" class="nav-button">Delete Group</a>
+        </nav>
+
+        <!-- Dynamic Sections -->
+        <section id="view-groups" class="hidden">
+            <h2>View Groups</h2>
+            <div id="view-groups-details">
+                <p>No groups available</p>
+            </div>
+        </section>
+
+        <!--
+        <section id="search-group" class="hidden">
+            <h2>Search Group</h2>
+            <form action="/search-group" method="GET">
+                <label for="group-id">Group ID:</label>
+                <input type="text" id="group-id" name="group_id">
+                <button class="nav-button">Search Group</button>
+            </form>
+        </section>
+        -->
+
+        <section id="create-group" class="hidden">
+            <h2>Create Group</h2>
+            <form action="/site/groups/create" method="POST">
+                <p><label for="group-name">Group Name:</label>
+                    <input type="text" id="group-name" name="groupName" required>
+                </p>
+                <p><label for="group-id">Group ID:</label>
+                    <input type="text" id="create-group-id" name="groupId" required>
+                </p>
+                <p><label for="group-description">Description:</label>
+                    <input type="text" id="group-description" name="description" required>
+                </p>
+                <button class="nav-button">Create</button>
+            </form>
+        </section>
+
+        <section id="update-group" class="hidden">
+            <h2>Update Group</h2>
+            <form action="/site/groups/update" method="POST">
+                <p><label for="update-group-id">Group ID:</label>
+                    <input type="text" id="update-group-id" name="groupId" value="{{groupId}}"  required>
+                </p>
+                <p><label for="group-name">Group Name:</label>
+                    <input type="text" id="update-group-name" name="groupName" required>
+                </p>
+                <p><label for="group-description">Description:</label>
+                    <input type="text" id="update-group-description" name="description" required>
+                </p>
+                <button class="nav-button">Update Group</button>
+            </form>
+        </section>
+
+        <section id="delete-group" class="hidden">
+            <h2>Delete Group</h2>
+            <form action="/site/groups/delete" method="POST">
+                <label for="delete-group-id">Group ID:</label>
+                <input type="text" id="delete-group-id" name="groupId">
+                <button class="nav-button">Delete Group</button>
+            </form>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 FOCCACIA Application</p>
+    </footer>
+</body>
+
+</html>

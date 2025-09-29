@@ -1,0 +1,79 @@
+@prefix = http://localhost:3310/api
+
+@userToken1 = c176eafd-25eb-45d3-a8cb-7218f3d63b3b
+@userToken2 = 3efa8c5d-a9f4-4d71-be2d-8d9347e540c0
+@userToken4 = af52c37d-8bc7-4647-8bf6-4129f65ceecb
+@userTokenNonExisting = 3efa8c5d-a9f4-4d71-be2d-8d9347e540c1
+
+@token = {{userToken1}}
+
+### List/Search groups feito
+GET {{prefix}}/groups   
+Authorization: Basic {{token}}
+
+### Get group details feito
+GET {{prefix}}/groups/portugues
+Authorization: Basic {{token}}
+
+### Delete Group feito
+DELETE {{prefix}}/groups/portugues
+Authorization: Basic {{token}}
+
+### Update Group
+POST {{prefix}}/groups/portugues
+Authorization: Basic {{token}}
+Content-Type: application/json
+
+{
+    "name": "Group portugues",
+    "description": "Description for Group ptt"
+}
+
+
+### Create Group feito
+POST {{prefix}}/groups  
+Authorization: Basic {{token}}
+Content-Type: application/json
+
+
+    {
+    "id": "mundo177777",
+    "name": "Clubes-Grandes",
+    "description": "Grupos de clubes de várias ligas europeias"
+     }
+
+
+
+### Add team
+POST {{prefix}}/groups/mundo
+Authorization: Basic {{token}}
+Content-Type: application/json
+
+{
+    "season": 2020,
+    "team_id": 541,
+    "league_id": 2
+}
+
+
+###delete team
+
+POST {{prefix}}/groups/portugues
+Authorization: Basic {{token}}
+Content-Type: application/json
+
+{
+    "teamName" : "Real Madrid"
+}
+
+
+###create user
+PUT {{prefix}}/users
+Content-Type: application/json
+
+{
+    "username": "User3",
+    "email": "user3@example.com",
+    "password": "password3"
+}
+

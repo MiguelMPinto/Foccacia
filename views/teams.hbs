@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Team</title>
+    <link rel="stylesheet" href="/html/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Search for a Team</h1>
+    </header>
+
+    <div class="container">
+        <form action="/site/groups/{{groupId}}/teams" method="GET">
+            <label for="teamName">Team Name:</label>
+            <input type="text" id="teamName" name="teamName" required>
+            <label for="season">Season:</label>
+            <input type="number" id="season" name="season" required>
+            <input type="hidden" name="action" value="1">
+            <button type="submit" class="nav-button">Search</button>
+        </form>
+        {{#if message}}
+
+        {{/if}}
+
+        {{#if result}}
+        <h2>Teams Found</h2>
+        <ul>
+            {{#each result.team}}
+
+            <li>
+                <strong>{{this.name}}</strong> (ID: {{this.id}}) - Stadium: {{this.stadium}}
+                <form action="/site/groups/{{../groupId}}/teams/select-league" method="POST" style="display: inline;">
+                    <input type="hidden" name="teamId" value="{{this.id}}">
+                    <input type="hidden" name="teamName" value="{{this.name}}">
+                    <input type="hidden" name="stadium" value="{{this.stadium}}">
+
+                    <input type="hidden" name="action" value=2>
+                    <input type="hidden" name="season" value="{{../season}}">
+
+
+                    <button type="submit" class="nav-button">Select Team</button>
+                </form>
+            </li>
+            {{/each}}
+        </ul>
+        {{else}}
+        <p>No teams found.</p>
+        {{/if}}
+
+    </div>
+
+
+
+
+    <footer>
+        <p>&copy; 2024 FOCCACIA Application</p>
+    </footer>
+</body>
+
+</html>

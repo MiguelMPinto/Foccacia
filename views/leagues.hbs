@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select League</title>
+    <link rel="stylesheet" href="/html/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Select a League</h1>
+    </header>
+
+
+    <div class="container">
+        <form action="/site/groups/{{groupId}}/teams/select-league" method="GET">
+            <input type="hidden" name="action" value="2">
+        </form>
+        {{#if message}}
+
+        {{/if}}
+
+        {{#if result}}
+        <h2>{{result.message}}</h2>
+        <ul>
+            {{#each result.leagues}}
+            <li>
+                <strong>{{this.leagueName}}</strong> (ID: {{this.id}}) - Stadium: {{this.stadium}}
+                <form action="/site/groups/{{../groupId}}/teams/addTeam" method="POST" style="display: inline;">
+                    <input type="hidden" name="teamId" value="{{../teamId}}">
+                    <input type="hidden" name="season" value="{{../season}}">
+                    <input type="hidden" name="league_name" value="{{this.leagueName}}">
+                    <input type="hidden" name="teamName" value="{{../teamName}}">
+                    <input type="hidden" name="stadium" value="{{../stadium}}">
+
+
+                    <button type="submit" class="nav-button">Select League</button>
+                </form>
+            </li>
+            {{/each}}
+        </ul>
+        {{else}}
+        <p>No teams found.</p>
+        {{/if}}
+
+    </div>
+</body>
+
+</html>

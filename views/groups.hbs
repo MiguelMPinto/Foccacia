@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Grupos</title>
+    <link rel="stylesheet" href="/html/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Todos os Grupos</h1>
+    </header>
+
+    <div class="container">
+        {{#if groups.length}}
+            <div class="groups-list">
+                {{#each groups}}
+                    <div class="group-card">
+                        <h3>{{this.name}}</h3>
+                        <p><strong>Description:</strong> {{this.description}}</p>
+                        <p><strong>Owner ID:</strong> {{#if this.ownerId}}{{this.ownerId}}{{else}}Not Available{{/if}}</p>
+                        <a href="/site/groups/{{this.id}}" class="details-link">View Details</a>
+                    </div>
+                {{/each}}
+            </div>
+        {{else}}
+            <p>No groups available.</p>
+        {{/if}}
+    </div>
+
+    <footer>
+        <p>&copy; 2024 FOCCACIA Application</p>
+    </footer>
+</body>
+
+</html>

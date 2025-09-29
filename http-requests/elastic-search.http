@@ -1,0 +1,112 @@
+@host = localhost
+@port = 9200
+
+
+GET http://{{host}}:{{port}}
+
+####admin requests
+
+http://{{host}}:{{port}}/_all
+
+###create index groups
+PUT http://{{host}}:{{port}}/groups
+
+
+### create index users
+PUT http://{{host}}:{{port}}/users
+
+###delete index groups
+DELETE http://{{host}}:{{port}}/groups
+
+####### Document operations
+
+PUT  http://{{host}}:{{port}}/groups/_doc/portugues
+Content-Type: application/json
+
+{
+    "name": "Clubes Portugueses",
+    "description": "tres grandes portugueses",
+    "ownerId": 1,
+    "teams": [
+        {
+            "name": "Benfica",
+            "stadium": "Estádio da Luz",
+            "league": "Primeira Liga",
+            "year": 2022
+        },
+        {
+            "name": "Porto",
+            "stadium": "Estádio do Dragão",
+            "league": "Primeira Liga",
+            "year": 2022
+        },
+        {
+            "name": "Sporting",
+            "stadium": "Estádio José Alvalade",
+            "league": "Primeira Liga",
+            "year": 2022
+        }
+    ] 
+}
+
+### Get all index documents
+
+GET http://{{host}}:{{port}}/users/_search
+
+### Delete a document
+
+DELETE http://{{host}}:{{port}}/groups/_doc/europa
+
+###delete all
+
+DELETE http://{{host}}:{{port}}/groups
+
+### Get a document
+
+GET http://{{host}}:{{port}}/groups/_doc/Clubes-Grandes2
+
+
+###put team
+
+POST http://localhost:9200/groups/_update/portugues
+Content-Type: application/json
+
+{
+  "script": {
+    "source": "if (ctx._source.teams != null) { ctx._source.teams.add(params.newTeam); } else { ctx._source.teams = [params.newTeam]; }",
+    "lang": "painless",
+    "params": {
+      "newTeam": {
+        "name": "Team Name",
+        "stadium_name": "Stadium Name",
+        "league": "League Name",
+        "season": 2023
+      }
+    }
+  }
+}
+
+### put user1
+PUT http://localhost:9200/users/_doc/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "username": "User1",
+  "email": "user1@slb.pt",
+  "password": "password1",
+  "token": "c176eafd-25eb-45d3-a8cb-7218f3d63b31"
+}
+
+###user 2
+
+PUT http://localhost:9200/users/_doc/2
+Content-Type: application/json
+
+{
+  "id": 2,
+  "username": "User2",
+  "email": "user2@slb.pt",
+  "password": "password2",
+  "token": "176eafd-25eb-45d3-a8cb-7218f3d63b32"
+}

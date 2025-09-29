@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{group.name}}</title>
+    <link rel="stylesheet" href="/html/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Detalhes do Grupo</h1>
+    </header>
+
+    <div class="container">
+        <div class="group-card">
+            <h3>{{group.name}}</h3>
+            <p><strong>Description:</strong> {{group.description}}</p>
+            <p><strong>Owner ID:</strong> {{#if group.ownerId}}{{group.ownerId}}{{else}}Not Available{{/if}}</p>
+            <p><strong>Group ID:</strong> {{groupId}}</p>
+
+
+            <div class="team-section">
+                <h4>Teams:</h4>
+                {{#if group.Teams}}
+                {{#each group.Teams}}
+                <div class="team-card">
+                    <p><strong>Team Name:</strong> {{this.name}}</p>
+                    <p><strong>Stadium:</strong> {{this.stadium}}</p>
+                    <p><strong>League:</strong> {{this.league}}</p>
+                    <p><strong>Year:</strong> {{this.year}}</p>
+
+                    <!-- Botão para eliminar a equipa -->
+                    <form action="/site/groups/{{../groupId}}/teams/delete" method="POST" class="delete-team-form">
+                        <input type="hidden" name="teamName" value="{{this.name}}">
+                        <button type="submit" class="nav-button">Delete Team</button>
+                    </form>
+                </div>
+                {{/each}}
+                {{else}}
+                <p>No teams available</p>
+                {{/if}}
+            </div>
+            <!-- Botão para redirecionar para a criação de equipa -->
+            <a href="/site/groups/{{groupId}}/teams" class="nav-button">Adicionar Equipa</a>
+
+
+        </div>
+    </div>
+</body>
+
+</html>
